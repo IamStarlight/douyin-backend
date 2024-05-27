@@ -2,11 +2,12 @@ package com.bjtu.douyin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bjtu.douyin.entity.Video;
 import com.bjtu.douyin.mapper.VideoMapper;
 import com.bjtu.douyin.service.IVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bjtu.douyin.utils.DateTimeUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,17 +25,20 @@ import java.util.Map;
 @Service
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements IVideoService {
 
+    @Autowired
+    private VideoMapper videoMapper;
+
     public void uploadAVideo(Video video) {
         video.setDeleted(false);
         video.setLikeCount(0);
         video.setReleaseDate(LocalDateTime.now());
     }
 
-    public List<Map<String,Object>> getVideoByUploader(Integer uid) {
+    public Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid) {
         LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Video::getUploaderId,uid)
                 .select(Video::getId,Video::getTitle,Video::getReleaseDate,Video::getLikeCount,Video::getUrl);
-        return listMaps(wrapper);
+        return videoMapper.selectMapsPage(new Page<>(currentPage,pageSize),wrapper);
     }
 
     public List<Map<String,Object>> getRecommendVideo() {

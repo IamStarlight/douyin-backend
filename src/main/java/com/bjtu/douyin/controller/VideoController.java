@@ -41,8 +41,10 @@ public class VideoController {
      */
     @GetMapping("/user/{uid}/videos")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
-    public ResponseEntity<Result> getVideoByUploader(@PathVariable Integer uid){
-        return new ResponseEntity<>(Result.success(videoService.getVideoByUploader(uid)), HttpStatus.OK);
+    public ResponseEntity<Result> getVideoByUploader(@PathVariable Integer uid,
+                                                     @RequestParam(defaultValue = "1") Integer currentPage,
+                                                     @RequestParam(defaultValue = "2") Integer pageSize){
+        return new ResponseEntity<>(Result.success(videoService.getVideoByUploader(currentPage,pageSize,uid)), HttpStatus.OK);
     }
 
     /**
@@ -56,11 +58,11 @@ public class VideoController {
     }
 
     /**
-     * 删除某用户发布的视频
+     * 删除视频
      * @param id
      * @return
      */
-    @DeleteMapping("/user/{uid}/videos")
+    @DeleteMapping("/videos/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> deleteMyVideo(@PathVariable Integer id){
         videoService.deleteMyVideo(id);

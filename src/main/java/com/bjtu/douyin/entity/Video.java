@@ -42,11 +42,14 @@ public class Video implements Serializable {
     @ApiModelProperty(value = "点赞数")
     private Integer likeCount;
 
+    @ApiModelProperty(value = "发布时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime releaseDate;
 
+    @ApiModelProperty(value = "发布者id")
     private Integer uploaderId;
 
+    @ApiModelProperty(value = "是否删除")
     private Boolean deleted;
 
 
