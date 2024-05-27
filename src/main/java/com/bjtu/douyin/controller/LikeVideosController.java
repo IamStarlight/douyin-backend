@@ -1,20 +1,38 @@
 package com.bjtu.douyin.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.bjtu.douyin.entity.Video;
+import com.bjtu.douyin.model.Result;
+import com.bjtu.douyin.service.impl.LikeVideosServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
- * 用户喜欢过的视频 前端控制器
- * </p>
- *
- * @author Jinxuan Chen
- * @since 2024-05-27
+ * 点赞管理
  */
 @RestController
-@RequestMapping("/like-videos")
 public class LikeVideosController {
 
+    @Autowired
+    private LikeVideosServiceImpl likeVideosService;
+
+
+    @PostMapping("/user/{uid}/like/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public ResponseEntity<Result> likeAVideo(@PathVariable Integer uid,
+                                               @PathVariable Integer id){
+        likeVideosService.likeAVideo(uid,id);
+        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/{uid}/like/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public ResponseEntity<Result> cancelMyLike(@PathVariable Integer uid,
+                                                @PathVariable Integer id){
+        likeVideosService.cancelMyLike(uid,id);
+        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+    }
 }

@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.jfr.Timestamp;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,5 +36,7 @@ public class LikeVideos implements Serializable {
     @ApiModelProperty(value = "视频id")
     private Integer videoId;
 
+    @ApiModelProperty(value = "时间戳")
+    private LocalDateTime timestamp;
 
 }
