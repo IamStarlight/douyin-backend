@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -35,12 +36,13 @@ public class Video implements Serializable {
     @ApiModelProperty(value = "视频标题")
     private String title;
 
-    @ApiModelProperty(value = "视频资源id")
-    private String fileId;
+    @ApiModelProperty(value = "视频资源地址")
+    private String url;
 
-    @ApiModelProperty(value = "dian'z")
+    @ApiModelProperty(value = "点赞数")
     private Integer likeCount;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime releaseDate;
 
     private Integer uploaderId;
