@@ -13,16 +13,9 @@ spring:
       database: 0
       timeout: 5000
 
-#  datasource:
-#    name: 'movie'
-#    url: jdbc:mysql://59.110.112.31:3306/movie?autoReconnect=true&serverTimezone=GMT
-#    username: 'root'
-#    password: 'root'
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-
   datasource:
-    name: 'movie'
-    url: jdbc:mysql://localhost:3306/movie?serverTimezone=GMT
+    name: 'douyin'
+    url: jdbc:mysql://localhost:3306/douyin?serverTimezone=GMT
     username: 'root'
     password: 'root'
     driver-class-name: com.mysql.cj.jdbc.Driver
