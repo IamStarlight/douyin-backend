@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.bjtu.douyin.mapper")
-public class MovieApplication {
+public class DouyinApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MovieApplication.class, args);
+		SpringApplication.run(DouyinApplication.class, args);
 	}
 
 }
