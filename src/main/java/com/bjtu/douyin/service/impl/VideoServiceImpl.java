@@ -32,6 +32,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         video.setDeleted(false);
         video.setLikeCount(0);
         video.setReleaseDate(LocalDateTime.now());
+        save(video);
     }
 
     public Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid) {
