@@ -30,7 +30,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Result> updateUserPassword(@PathVariable Integer id,@RequestParam String password){
         userService.resetPassword(id,password);
-        return new ResponseEntity<>((Result.success()),HttpStatus.OK);
+        return new ResponseEntity<>((Result.success()),HttpStatus.CREATED);
     }
 
     /**
@@ -43,7 +43,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Result> updateUserInfo(@PathVariable Integer id, @RequestBody User info){
         userService.resetInfo(id,info);
-        return new ResponseEntity<>((Result.success()),HttpStatus.OK);
+        return new ResponseEntity<>((Result.success()),HttpStatus.CREATED);
     }
 
     /**
@@ -76,7 +76,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     public ResponseEntity<Result> deleteOneUser(@PathVariable Integer id) {
         userService.deleteOneUser(id);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.NO_CONTENT);
     }
 
 }

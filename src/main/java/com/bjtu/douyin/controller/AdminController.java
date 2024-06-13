@@ -32,7 +32,8 @@ public class AdminController {
     @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> adminRegister(@RequestBody Admin admin) {
         adminService.adminRegister(admin);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        // 返回状态码201 用户新建或修改数据成功
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
@@ -66,7 +67,7 @@ public class AdminController {
     @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     public ResponseEntity<Result> resetPassword(@PathVariable Integer id, @RequestParam String password) {
         adminService.resetPassword(id,password);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
@@ -79,7 +80,7 @@ public class AdminController {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Result> updateUserInfo(@CurrentUser User user, @RequestBody Admin info){
         adminService.resetInfo(user.getId(),info);
-        return new ResponseEntity<>((Result.success()),HttpStatus.OK);
+        return new ResponseEntity<>((Result.success()),HttpStatus.CREATED);
     }
 
     /**
@@ -91,7 +92,7 @@ public class AdminController {
     @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> deleteOneAdmin(@PathVariable Integer id) {
         adminService.deleteOneAdmin(id);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.NO_CONTENT);
     }
 
 }

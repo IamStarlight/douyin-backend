@@ -31,15 +31,21 @@ public class VideoController {
                                                @RequestBody Video video){
         video.setUploaderId(uid);
         videoService.uploadAVideo(video);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
+    /**
+     * 标记浏览视频
+     * @param uid
+     * @param id
+     * @return
+     */
     @PutMapping("/user/{uid}/videos/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
-    public ResponseEntity<Result> hasWatchedVideo(@PathVariable Integer uid,
+    public ResponseEntity<Result> userWatchVideo(@PathVariable Integer uid,
                                                @PathVariable Integer id){
         videoService.userWatchVideo(uid,id);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
@@ -74,6 +80,7 @@ public class VideoController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> deleteMyVideo(@PathVariable Integer id){
         videoService.deleteMyVideo(id);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        //用户删除数据成功后，返回204
+        return new ResponseEntity<>(Result.success(), HttpStatus.NO_CONTENT);
     }
 }

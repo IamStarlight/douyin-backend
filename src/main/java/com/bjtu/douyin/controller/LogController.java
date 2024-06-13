@@ -32,7 +32,7 @@ public class LogController {
     @PostMapping("/signup")
     public ResponseEntity<Result> register(@RequestBody @Valid User newUser){
         userService.register(newUser);
-        return new ResponseEntity<>((Result.success()), HttpStatus.OK);
+        return new ResponseEntity<>((Result.success()), HttpStatus.CREATED);
     }
 
     /**
