@@ -134,6 +134,13 @@
 <!--            <artifactId>spring-webmvc</artifactId>-->
 <!--            <version>4.0.7</version>-->
 <!--        </dependency>-->
+		<!-- bloom filter -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1-jre</version>
+		</dependency>
+
 	</dependencies>
 
 	<repositories>

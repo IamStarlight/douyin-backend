@@ -21,7 +21,10 @@ public interface IVideoService extends IService<Video> {
 
     Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid);
 
-    List<Map<String,Object>> getRecommendVideo();
+
+    List<Map<String,Object>> getRecommendVideo(Integer uid);
 
     void deleteMyVideo(Integer id);
+
+    void userWatchVideo(Integer uid, Integer id);
 }

@@ -34,6 +34,14 @@ public class VideoController {
         return new ResponseEntity<>(Result.success(), HttpStatus.OK);
     }
 
+    @PutMapping("/user/{uid}/videos/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public ResponseEntity<Result> hasWatchedVideo(@PathVariable Integer uid,
+                                               @PathVariable Integer id){
+        videoService.userWatchVideo(uid,id);
+        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+    }
+
     /**
      * 获取某用户发布的视频
      * @param uid
@@ -51,10 +59,10 @@ public class VideoController {
      * 获取推荐视频
      * @return
      */
-    @GetMapping("/videos")
+    @GetMapping("/user/{uid}/videos/recommend")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
-    public ResponseEntity<Result> getRecommendVideo(){
-        return new ResponseEntity<>(Result.success(videoService.getRecommendVideo()), HttpStatus.OK);
+    public ResponseEntity<Result> getRecommendVideo(@PathVariable Integer uid){
+        return new ResponseEntity<>(Result.success(videoService.getRecommendVideo(uid)), HttpStatus.OK);
     }
 
     /**
