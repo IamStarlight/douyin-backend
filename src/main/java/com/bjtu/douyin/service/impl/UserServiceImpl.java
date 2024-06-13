@@ -97,7 +97,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         map.put("token",jwt);
 //        map.put("permission",nowUser.getPermission());
         map.put("name", nowUser.getName());
-//        map.put("id", nowUser.getId().toString());
+        map.put("id", nowUser.getId().toString());
 
         return map;
     }

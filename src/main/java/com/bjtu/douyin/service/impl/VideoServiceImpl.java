@@ -28,6 +28,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Autowired
     private VideoMapper videoMapper;
 
+    @Override
     public void uploadAVideo(Video video) {
         video.setDeleted(false);
         video.setLikeCount(0);
@@ -35,6 +36,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         save(video);
     }
 
+    @Override
     public Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid) {
         LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Video::getUploaderId,uid)
@@ -42,6 +44,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return videoMapper.selectMapsPage(new Page<>(currentPage,pageSize),wrapper);
     }
 
+    @Override
     public List<Map<String,Object>> getRecommendVideo() {
         //todo: 访问过的不推荐
         LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
@@ -50,6 +53,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return listMaps(wrapper);
     }
 
+    @Override
     public void deleteMyVideo(Integer id) {
         LambdaUpdateWrapper<Video> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Video::getId,id)

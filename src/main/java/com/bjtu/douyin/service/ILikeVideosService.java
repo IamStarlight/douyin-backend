@@ -13,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ILikeVideosService extends IService<LikeVideos> {
 
+    void likeAVideo(Integer uid, Integer id);
+
+    LikeVideos getLikeByIds(Integer uid, Integer id);
+
+    void cancelMyLike(Integer uid, Integer id);
 }

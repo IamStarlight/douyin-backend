@@ -7,7 +7,6 @@ import com.bjtu.douyin.exception.ServiceException;
 import com.bjtu.douyin.mapper.LikeVideosMapper;
 import com.bjtu.douyin.service.ILikeVideosService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import jdk.jfr.Timestamp;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +24,7 @@ import java.util.Objects;
 @Service
 public class LikeVideosServiceImpl extends ServiceImpl<LikeVideosMapper, LikeVideos> implements ILikeVideosService {
 
+    @Override
     public void likeAVideo(Integer uid, Integer id) {
         if(!Objects.isNull(getLikeByIds(uid,id))){
             throw new ServiceException(HttpStatus.FORBIDDEN.value(), "已点过赞");
@@ -36,13 +36,15 @@ public class LikeVideosServiceImpl extends ServiceImpl<LikeVideosMapper, LikeVid
         save(likeVideos);
     }
 
-    private LikeVideos getLikeByIds(Integer uid, Integer id) {
+    @Override
+    public LikeVideos getLikeByIds(Integer uid, Integer id) {
         LambdaQueryWrapper<LikeVideos> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(LikeVideos::getUserId,uid)
                 .eq(LikeVideos::getVideoId,id);
         return getOne(wrapper);
     }
 
+    @Override
     public void cancelMyLike(Integer uid, Integer id) {
         if(Objects.isNull(getLikeByIds(uid,id))){
             throw new ServiceException(HttpStatus.NOT_FOUND.value(), "已取消点赞");
