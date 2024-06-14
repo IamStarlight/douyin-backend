@@ -1,4 +1,4 @@
-## 简单介绍
+## 简单介绍 只是框架
 
 - `spring boot`：
     - `spring-boot-starter-web`：web 组件
@@ -8,6 +8,7 @@
 - `javamelody-spring-boot-starter`：监控器，打印 http 请求 url，响应时间
 - `lombok`：Java 实用工具，必备插件
 - `validator`：参数校验相关的注解
+- `logback`:日志，生成在控制台和文件里，还没完成
 
 ## 如何使用
 
