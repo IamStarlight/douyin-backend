@@ -26,10 +26,8 @@ spring:
 
   main:
     allow-circular-references: true
+#有点问题
 
-  logging:
-    level:
-      com.hexadecimal: debug
 
 mybatis-plus:
   type-aliases-package: com.bjtu.entity
@@ -40,3 +38,15 @@ mybatis-plus:
 
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+# 监控
+javamelody:
+  enabled: true
+  init-parameters:
+    log: true
+
+# 日志级别
+logging:
+  level:
+    com.bjtu.douyin: debug
