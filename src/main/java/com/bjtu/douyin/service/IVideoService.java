@@ -1,7 +1,11 @@
 package com.bjtu.douyin.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bjtu.douyin.entity.Video;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +17,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IVideoService extends IService<Video> {
 
+    void uploadAVideo(Video video);
+
+    Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid);
+
+
+    List<Map<String,Object>> getRecommendVideo(Integer uid);
+
+    void deleteMyVideo(Integer id);
+
+    void userWatchVideo(Integer uid, Integer id);
 }

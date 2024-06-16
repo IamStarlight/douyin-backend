@@ -34,6 +34,14 @@ public class VideoController {
         return new ResponseEntity<>(Result.success(), HttpStatus.OK);
     }
 
+    @PutMapping("/user/{uid}/videos/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public ResponseEntity<Result> hasWatchedVideo(@PathVariable Integer uid,
+                                               @PathVariable Integer id){
+        videoService.userWatchVideo(uid,id);
+        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+    }
+
     /**
      * 获取某用户发布的视频
      * @param uid
@@ -41,26 +49,28 @@ public class VideoController {
      */
     @GetMapping("/user/{uid}/videos")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
-    public ResponseEntity<Result> getVideoByUploader(@PathVariable Integer uid){
-        return new ResponseEntity<>(Result.success(videoService.getVideoByUploader(uid)), HttpStatus.OK);
+    public ResponseEntity<Result> getVideoByUploader(@PathVariable Integer uid,
+                                                     @RequestParam(defaultValue = "1") Integer currentPage,
+                                                     @RequestParam(defaultValue = "2") Integer pageSize){
+        return new ResponseEntity<>(Result.success(videoService.getVideoByUploader(currentPage,pageSize,uid)), HttpStatus.OK);
     }
 
     /**
      * 获取推荐视频
      * @return
      */
-    @GetMapping("/videos")
+    @GetMapping("/user/{uid}/videos/recommend")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
-    public ResponseEntity<Result> getRecommendVideo(){
-        return new ResponseEntity<>(Result.success(videoService.getRecommendVideo()), HttpStatus.OK);
+    public ResponseEntity<Result> getRecommendVideo(@PathVariable Integer uid){
+        return new ResponseEntity<>(Result.success(videoService.getRecommendVideo(uid)), HttpStatus.OK);
     }
 
     /**
-     * 删除某用户发布的视频
+     * 删除视频
      * @param id
      * @return
      */
-    @DeleteMapping("/user/{uid}/videos")
+    @DeleteMapping("/videos/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> deleteMyVideo(@PathVariable Integer id){
         videoService.deleteMyVideo(id);
