@@ -128,12 +128,16 @@
 			<artifactId>mybatis-plus-join</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+
 		<!-- 自定义注解 -->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework</groupId>-->
 <!--            <artifactId>spring-webmvc</artifactId>-->
 <!--            <version>4.0.7</version>-->
 <!--        </dependency>-->
+
+
+
 		<!-- bloom filter -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -155,6 +159,8 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+
 
 	<build>
 		<plugins>
