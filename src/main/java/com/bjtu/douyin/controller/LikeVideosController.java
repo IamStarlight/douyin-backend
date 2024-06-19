@@ -26,7 +26,7 @@ public class LikeVideosController {
      * @return
      */
     @PostMapping("/user/{uid}/like/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> likeAVideo(@PathVariable Integer uid,
                                                @PathVariable Integer id){
         likeVideosService.likeAVideo(uid,id);
@@ -40,7 +40,7 @@ public class LikeVideosController {
      * @return
      */
     @DeleteMapping("/user/{uid}/like/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> cancelMyLike(@PathVariable Integer uid,
                                                 @PathVariable Integer id){
         likeVideosService.cancelMyLike(uid,id);

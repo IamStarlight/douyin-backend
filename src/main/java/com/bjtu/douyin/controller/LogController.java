@@ -60,7 +60,7 @@ public class LogController {
      * @return
      */
     @PostMapping("/user/logout")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> logout(){
         userService.logout();
         return new ResponseEntity<>(Result.success(), HttpStatus.OK);
@@ -71,7 +71,7 @@ public class LogController {
      * @return
      */
     @PostMapping("/admin/logout")
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     public ResponseEntity<Result> logoutAdmin(){
         adminService.logout();
         return new ResponseEntity<>(Result.success(), HttpStatus.OK);
