@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import lombok.NonNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 /**
  * 用户管理
@@ -19,8 +17,6 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -34,7 +30,6 @@ public class UserController {
     @PutMapping("/security/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Result> updateUserPassword(@PathVariable Integer id,@RequestParam String password){
-        logger.info("Received request with input:");
         userService.resetPassword(id,password);
         return new ResponseEntity<>((Result.success()),HttpStatus.OK);
     }
