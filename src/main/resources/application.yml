@@ -17,7 +17,7 @@ spring:
     name: 'douyin'
     url: jdbc:mysql://localhost:3306/douyin?serverTimezone=GMT
     username: 'root'
-    password: 'root'
+    password: 'jiangyin1975'
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jackson:
