@@ -28,7 +28,11 @@ spring:
 
   main:
     allow-circular-references: true
-#有点问题
+
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
 
 mybatis-plus:
   type-aliases-package: com.bjtu.entity
