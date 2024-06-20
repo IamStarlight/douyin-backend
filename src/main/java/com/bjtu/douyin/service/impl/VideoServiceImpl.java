@@ -53,6 +53,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public Page<Map<String,Object>> getVideoByUploader(Integer currentPage, Integer pageSize, Integer uid) {
         LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Video::getUploaderId,uid)
+                .eq(Video::getDeleted,false)
                 .select(Video::getId,Video::getTitle,Video::getReleaseDate,Video::getLikeCount,Video::getUrl);
         return videoMapper.selectMapsPage(new Page<>(currentPage,pageSize),wrapper);
     }
