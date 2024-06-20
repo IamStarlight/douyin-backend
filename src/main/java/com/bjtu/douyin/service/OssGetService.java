@@ -11,6 +11,7 @@ import static com.bjtu.douyin.service.OssPushService.uploadFile;
 
 public class OssGetService {
 
+    //利用群里的阿里云密钥替换
     private static final String ENDPOINT = "";
     private static final String BUCKET_NAME = "";
     private static final String ACCESS_KEY_ID = "";

@@ -14,6 +14,7 @@ import java.io.InputStream;
 
 public class OssPushService {
 
+    //使用群里的阿里云密钥替换
     private static final String ENDPOINT = "";
     private static final String BUCKET_NAME = "";
     private static final String ACCESS_KEY_ID = "";

@@ -129,31 +129,12 @@
 			<version>1.2.4</version>
 		</dependency>
 
-		<!-- 自定义注解 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-webmvc</artifactId>-->
-<!--            <version>4.0.7</version>-->
-<!--        </dependency>-->
-
 		<!--阿里云OSS上传-->
-<!--		<dependency>-->
-<!--			<groupId>com.aliyun.oss</groupId>-->
-<!--			<artifactId>aliyun-sdk-oss</artifactId>-->
-<!--			<version>3.10.2</version> &lt;!&ndash; 使用最新的版本 &ndash;&gt;-->
-<!--		</dependency>-->
-
-		<!--日志-->
-<!--		<dependency>-->
-<!--			<groupId>org.slf4j</groupId>-->
-<!--			<artifactId>slf4j-api</artifactId>-->
-<!--			<version>1.7.32</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>ch.qos.logback</groupId>-->
-<!--			<artifactId>logback-classic</artifactId>-->
-<!--			<version>3.0.0</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>3.10.2</version> <!-- 使用最新的版本 -->
+		</dependency>
 
 		<!-- bloom filter -->
 		<dependency>
@@ -162,7 +143,7 @@
 			<version>30.1-jre</version>
 		</dependency>
 
-		<!--ly-->
+	<!--ly-->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -189,7 +170,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.1.5.Final</version>
 		</dependency>
-    <!--ly-->
+	<!--ly-->
     
 	</dependencies>
 
