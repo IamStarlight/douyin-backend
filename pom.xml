@@ -136,7 +136,24 @@
 <!--            <version>4.0.7</version>-->
 <!--        </dependency>-->
 
+		<!--阿里云OSS上传-->
+<!--		<dependency>-->
+<!--			<groupId>com.aliyun.oss</groupId>-->
+<!--			<artifactId>aliyun-sdk-oss</artifactId>-->
+<!--			<version>3.10.2</version> &lt;!&ndash; 使用最新的版本 &ndash;&gt;-->
+<!--		</dependency>-->
 
+		<!--日志-->
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-api</artifactId>-->
+<!--			<version>1.7.32</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>ch.qos.logback</groupId>-->
+<!--			<artifactId>logback-classic</artifactId>-->
+<!--			<version>3.0.0</version>-->
+<!--		</dependency>-->
 
 		<!-- bloom filter -->
 		<dependency>
@@ -144,7 +161,6 @@
 			<artifactId>guava</artifactId>
 			<version>30.1-jre</version>
 		</dependency>
-
 	</dependencies>
 
 	<repositories>
