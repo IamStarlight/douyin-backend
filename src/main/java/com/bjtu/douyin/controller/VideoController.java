@@ -35,6 +35,21 @@ public class VideoController {
     }
 
     /**
+     * 修改视频
+     * @param uid
+     * @param video
+     * @return
+     */
+    @PutMapping("/user/{uid}/videos")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public ResponseEntity<Result> modifyVideoInfo(@PathVariable Integer uid,
+                                                    @RequestBody Video video){
+        video.setUploaderId(uid);
+        videoService.modifyVideoInfo(video);
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
+    }
+
+    /**
      * 标记浏览视频
      * @param uid
      * @param id
@@ -57,7 +72,7 @@ public class VideoController {
     //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> getVideoByUploader(@PathVariable Integer uid,
                                                      @RequestParam(defaultValue = "1") Integer currentPage,
-                                                     @RequestParam(defaultValue = "2") Integer pageSize){
+                                                     @RequestParam(defaultValue = "10") Integer pageSize){
         return new ResponseEntity<>(Result.success(videoService.getVideoByUploader(currentPage,pageSize,uid)), HttpStatus.OK);
     }
 

@@ -27,4 +27,10 @@ public interface IVideoService extends IService<Video> {
     void deleteMyVideo(Integer id);
 
     void userWatchVideo(Integer uid, Integer id);
+
+    void modifyVideoInfo(Video video);
+
+    Video getVideoByIdAndUid(Integer id, Integer uploaderId);
+
+    Video getVideoById(Integer id);
 }

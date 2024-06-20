@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bjtu.douyin.entity.Video;
+import com.bjtu.douyin.exception.ServiceException;
 import com.bjtu.douyin.mapper.VideoMapper;
 import com.bjtu.douyin.service.IVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.Charset;
@@ -107,5 +109,32 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         BloomFilter<String> bloomFilter = bloomFilters.computeIfAbsent(uid, k -> BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), insertions, fpp));
         // 将视频ID添加到用户的布隆过滤器中
         bloomFilter.put(String.valueOf(id));
+    }
+
+    @Override
+    public void modifyVideoInfo(Video video) {
+        if(getVideoByIdAndUid(video.getId(),video.getUploaderId()) == null){
+            throw new ServiceException(HttpStatus.FORBIDDEN.value(), "视频不存在");
+        }
+        LambdaUpdateWrapper<Video> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(Video::getId,video.getId());
+        update(video,wrapper);
+    }
+
+    @Override
+    public Video getVideoByIdAndUid(Integer id, Integer uploaderId) {
+        LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Video::getId,id)
+                .eq(Video::getUploaderId,uploaderId)
+                .eq(Video::getDeleted,false);
+        return getOne(wrapper);
+    }
+
+    @Override
+    public Video getVideoById(Integer id) {
+        LambdaQueryWrapper<Video> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Video::getId,id)
+                .eq(Video::getDeleted,false);
+        return getOne(wrapper);
     }
 }
