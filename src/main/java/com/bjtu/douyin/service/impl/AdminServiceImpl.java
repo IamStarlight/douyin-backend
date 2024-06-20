@@ -2,6 +2,7 @@ package com.bjtu.douyin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.bjtu.douyin.controller.UserController;
 import com.bjtu.douyin.controller.dto.LoginDto;
 import com.bjtu.douyin.entity.Admin;
 import com.bjtu.douyin.constants.Role;
@@ -13,6 +14,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bjtu.douyin.utils.DateTimeUtil;
 import com.bjtu.douyin.utils.JwtUtil;
 import com.bjtu.douyin.utils.RedisCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,6 +41,8 @@ import java.util.Objects;
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private RedisCache redisCache;
 
@@ -49,6 +54,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public void initSuperAdmin() {
+
+        logger.info("Received request with input:");
         //如果不存在超级管理员，创建一个
         if(!hasSuperAdmin()) {
             Admin superAdmin = new Admin();
