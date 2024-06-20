@@ -128,12 +128,14 @@
 			<artifactId>mybatis-plus-join</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+
 		<!-- 自定义注解 -->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework</groupId>-->
 <!--            <artifactId>spring-webmvc</artifactId>-->
 <!--            <version>4.0.7</version>-->
 <!--        </dependency>-->
+
 		<!--阿里云OSS上传-->
 <!--		<dependency>-->
 <!--			<groupId>com.aliyun.oss</groupId>-->
@@ -153,6 +155,12 @@
 <!--			<version>3.0.0</version>-->
 <!--		</dependency>-->
 
+		<!-- bloom filter -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1-jre</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -167,6 +175,8 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+
 
 	<build>
 		<plugins>

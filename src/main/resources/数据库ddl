@@ -1,0 +1,48 @@
+create table video
+(
+    id           int auto_increment comment '视频id'
+        primary key,
+    title        varchar(255) null comment '视频标题',
+    url          varchar(255) null comment '视频资源地址',
+    like_count   int          null comment '点赞数',
+    release_date datetime     null comment '发布时间',
+    uploader_id  int          null comment '发布者id',
+    deleted      tinyint(1)   null comment '是否删除'
+)
+    comment '视频表';
+
+-- auto-generated definition
+create table user
+(
+    id         int auto_increment comment '用户id'
+        primary key,
+    name       varchar(255)         null comment '用户名',
+    password   varchar(255)         null comment '用户密码',
+    permission varchar(255)         null comment '用户权限',
+    created_at varchar(255)         null comment '创建时间',
+    deleted    tinyint(1) default 0 null comment '是否删除'
+)
+    comment '用户表';
+
+-- auto-generated definition
+create table like_videos
+(
+    user_id   int      null comment '用户id',
+    video_id  int      null comment '视频id',
+    timestamp datetime null comment '时间戳'
+)
+    comment '视频点赞表';
+
+-- auto-generated definition
+create table admin
+(
+    id         int auto_increment comment '管理员id'
+        primary key,
+    name       varchar(255)         null comment '管理员名称',
+    password   varchar(255)         null comment '管理员密码',
+    permission varchar(255)         null comment '管理员权限',
+    created_at varchar(255)         null comment '创建时间',
+    deleted    tinyint(1) default 0 null comment '是否删除'
+)
+    comment '管理员表';
+

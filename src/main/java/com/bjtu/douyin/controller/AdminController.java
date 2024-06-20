@@ -29,10 +29,11 @@ public class AdminController {
      * @throws Exception
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> adminRegister(@RequestBody Admin admin) {
         adminService.adminRegister(admin);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        // 返回状态码201 用户新建或修改数据成功
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
@@ -40,7 +41,7 @@ public class AdminController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> getAllAdmin() {
         return new ResponseEntity<>(Result.success(adminService.getAllAdmin()), HttpStatus.OK);
     }
@@ -51,7 +52,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> getOneAdmin(@PathVariable Integer id){
         return new ResponseEntity<>(Result.success(adminService.getOneAdmin(id)), HttpStatus.OK);
     }
@@ -63,10 +64,10 @@ public class AdminController {
      * @return
      */
     @PutMapping("/security/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     public ResponseEntity<Result> resetPassword(@PathVariable Integer id, @RequestParam String password) {
         adminService.resetPassword(id,password);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
@@ -76,10 +77,10 @@ public class AdminController {
      * @return
      */
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Result> updateUserInfo(@CurrentUser User user, @RequestBody Admin info){
         adminService.resetInfo(user.getId(),info);
-        return new ResponseEntity<>((Result.success()),HttpStatus.OK);
+        return new ResponseEntity<>((Result.success()),HttpStatus.CREATED);
     }
 
     /**
@@ -88,10 +89,10 @@ public class AdminController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Result> deleteOneAdmin(@PathVariable Integer id) {
         adminService.deleteOneAdmin(id);
-        return new ResponseEntity<>(Result.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Result.success(), HttpStatus.NO_CONTENT);
     }
 
 }
