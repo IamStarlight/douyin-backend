@@ -1,5 +1,7 @@
 package com.bjtu.douyin.handler;
 
+import com.aliyun.oss.ClientException;
+import com.aliyun.oss.OSSException;
 import com.bjtu.douyin.exception.ServiceException;
 import com.bjtu.douyin.model.Result;
 import jakarta.validation.ConstraintViolationException;
@@ -97,6 +99,42 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity<Result> handleRedisConnectionException(RedisConnectionFailureException e) {
         return ResponseEntity.internalServerError().body(Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+    }
+
+    /**
+     * OSSException
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler({OSSException.class})
+    @ResponseBody
+    public ResponseEntity<Result> handleOSSException(OSSException e) {
+        return ResponseEntity.internalServerError().body(
+                Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Caught an OSSException, which means your request made it to OSS, "
+                            + "but was rejected with an error response for some reason."+"\n"+
+                        "Error Message:" + e.getErrorMessage()+"\n"+
+                                "Error Code:" + e.getErrorCode()+"\n"+
+                                "Request ID:" + e.getRequestId()+"\n"+
+                                "Host ID:" + e.getHostId()));
+    }
+
+    /**
+     * ClientException
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler({ClientException.class})
+    @ResponseBody
+    public ResponseEntity<Result> handleClientException(ClientException e) {
+        return ResponseEntity.internalServerError().body(
+                Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "Caught a ClientException, which means the client encountered "
+                                + "a serious internal problem while trying to communicate with OSS, "
+                                + "such as not being able to access the network."+"\n"+
+                                "Error Message:" + e.getMessage()));
     }
 
 }
