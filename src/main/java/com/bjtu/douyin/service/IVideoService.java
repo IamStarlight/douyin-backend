@@ -33,4 +33,8 @@ public interface IVideoService extends IService<Video> {
     Video getVideoByIdAndUid(Integer id, Integer uploaderId);
 
     Video getVideoById(Integer id);
+
+    void addLikeCount(Integer id);
+
+    void reduceLikeCount(Integer id);
 }

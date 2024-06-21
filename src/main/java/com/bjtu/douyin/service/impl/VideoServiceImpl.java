@@ -137,4 +137,18 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .eq(Video::getDeleted,false);
         return getOne(wrapper);
     }
+
+    @Override
+    public void addLikeCount(Integer id) {
+        Video video = getById(id);
+        video.setLikeCount(video.getLikeCount() + 1);
+        updateById(video);
+    }
+
+    @Override
+    public void reduceLikeCount(Integer id) {
+        Video video = getById(id);
+        video.setLikeCount(video.getLikeCount() - 1);
+        updateById(video);
+    }
 }

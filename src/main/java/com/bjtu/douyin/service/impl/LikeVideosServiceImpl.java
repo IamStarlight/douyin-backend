@@ -7,6 +7,7 @@ import com.bjtu.douyin.exception.ServiceException;
 import com.bjtu.douyin.mapper.LikeVideosMapper;
 import com.bjtu.douyin.service.ILikeVideosService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ import java.util.Objects;
 @Service
 public class LikeVideosServiceImpl extends ServiceImpl<LikeVideosMapper, LikeVideos> implements ILikeVideosService {
 
+    @Autowired
+    private VideoServiceImpl videoService;
+
     @Override
     public void likeAVideo(Integer uid, Integer id) {
         if(!Objects.isNull(getLikeByIds(uid,id))){
@@ -34,6 +38,8 @@ public class LikeVideosServiceImpl extends ServiceImpl<LikeVideosMapper, LikeVid
         likeVideos.setVideoId(id);
         likeVideos.setTimestamp(LocalDateTime.now());
         save(likeVideos);
+        //增加点赞数
+        videoService.addLikeCount(id);
     }
 
     @Override
@@ -53,6 +59,8 @@ public class LikeVideosServiceImpl extends ServiceImpl<LikeVideosMapper, LikeVid
         wrapper.eq(LikeVideos::getUserId,uid)
                 .eq(LikeVideos::getVideoId,id);
         remove(wrapper);
+        //减少点赞数
+        videoService.reduceLikeCount(id);
     }
 
 

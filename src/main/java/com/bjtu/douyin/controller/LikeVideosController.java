@@ -22,28 +22,28 @@ public class LikeVideosController {
     /**
      * 用户点赞视频
      * @param uid
-     * @param id
+     * @param vid
      * @return
      */
-    @PostMapping("/user/{uid}/like/{id}")
+    @PostMapping("/user/{uid}/like/{vid}")
     //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> likeAVideo(@PathVariable Integer uid,
-                                               @PathVariable Integer id){
-        likeVideosService.likeAVideo(uid,id);
+                                               @PathVariable Integer vid){
+        likeVideosService.likeAVideo(uid,vid);
         return new ResponseEntity<>(Result.success(), HttpStatus.CREATED);
     }
 
     /**
      * 用户取消点赞视频
      * @param uid
-     * @param id
+     * @param vid
      * @return
      */
-    @DeleteMapping("/user/{uid}/like/{id}")
+    @DeleteMapping("/user/{uid}/like/{vid}")
     //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Result> cancelMyLike(@PathVariable Integer uid,
-                                                @PathVariable Integer id){
-        likeVideosService.cancelMyLike(uid,id);
+                                                @PathVariable Integer vid){
+        likeVideosService.cancelMyLike(uid,vid);
         return new ResponseEntity<>(Result.success(), HttpStatus.NO_CONTENT);
     }
 }
