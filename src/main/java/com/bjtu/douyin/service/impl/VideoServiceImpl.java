@@ -87,7 +87,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         List<Map<String,Object>> recommendVideos = new ArrayList<>();
 
         // 从队列中取出前10个视频
-        for (int i = 0; i < 10 && !recommendVideoQueue.isEmpty(); i++) {
+        for (int i = 0; i < 5 && !recommendVideoQueue.isEmpty(); i++) {
             recommendVideos.add(recommendVideoQueue.poll());
         }
 
