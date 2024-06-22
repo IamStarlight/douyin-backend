@@ -148,7 +148,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public void reduceLikeCount(Integer id) {
         Video video = getById(id);
-        video.setLikeCount(video.getLikeCount() - 1);
-        updateById(video);
+        if(video.getLikeCount() > 0) {
+            video.setLikeCount(video.getLikeCount() - 1);
+            updateById(video);
+        }
     }
 }
